@@ -16,19 +16,20 @@ export default{
         console.log(lastPulledVersion);
 
         if(lastPulledVersion != "0"){
-          //console.log('entro aqui');
+         
           const datalastpull = new Date(Number(lastPulledVersion));
          
           let formattedDate = (moment(datalastpull)).format('YYYY-MM-DD HH:mm:ss');
           
           dataFormatted = formattedDate;
-
+          
         }else{
           //console.log('entro aqui 2');
-          const datalastpull = new Date();
+          const datalastpull = new Date(Number(lastPulledVersion));
           let formattedDate = (moment(datalastpull)).format('YYYY-MM-DD');
            //console.log(formattedDate);
            dataFormatted = formattedDate+' 00:00:00';
+           console.log(dataFormatted);
         }
         
 

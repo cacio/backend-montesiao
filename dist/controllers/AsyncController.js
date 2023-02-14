@@ -14,17 +14,17 @@ exports.default = {
         let dataFormatted = "";
         console.log(lastPulledVersion);
         if (lastPulledVersion != "0") {
-            //console.log('entro aqui');
             const datalastpull = new Date(Number(lastPulledVersion));
             let formattedDate = ((0, moment_1.default)(datalastpull)).format('YYYY-MM-DD HH:mm:ss');
             dataFormatted = formattedDate;
         }
         else {
             //console.log('entro aqui 2');
-            const datalastpull = new Date();
+            const datalastpull = new Date(Number(lastPulledVersion));
             let formattedDate = ((0, moment_1.default)(datalastpull)).format('YYYY-MM-DD');
             //console.log(formattedDate);
             dataFormatted = formattedDate + ' 00:00:00';
+            console.log(dataFormatted);
         }
         //console.log("data formatada: "+dataFormatted);
         /*Dados de Cliente*/
