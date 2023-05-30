@@ -6,10 +6,18 @@ export class createCondicoesPagamentos1640198299416 implements MigrationInterfac
     await queryRunner.createTable(new Table({
       name:"condigoes_pagamento",
       columns: [
+        // {
+        //   name: "id",
+        //   type: "uuid",
+        //   isPrimary: true,
+        // },
         {
-          name: "id",
-          type: "uuid",
-          isPrimary: true,
+          name:'id',
+          type:'integer',
+          unsigned:true,
+          isPrimary:true,
+          isGenerated:true,
+          generationStrategy:'increment',     
         },
         {
           name:"codigo",

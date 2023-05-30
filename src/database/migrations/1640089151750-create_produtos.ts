@@ -6,11 +6,19 @@ export class createProdutos1640089151750 implements MigrationInterface {
         await queryRunner.createTable(new Table({
             name:"produtos",
             columns: [
+                // {
+                //     name: "id",
+                //     type: "uuid",
+                //     isPrimary: true,
+                // },
                 {
-                    name: "id",
-                    type: "uuid",
-                    isPrimary: true,
-                },
+                    name:'id',
+                    type:'integer',
+                    unsigned:true,
+                    isPrimary:true,
+                    isGenerated:true,
+                    generationStrategy:'increment',     
+                  },
                 {
                     name:"codigo",
                     type:"varchar"

@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Produtos_1 = __importDefault(require("../models/Produtos"));
 const produtos_view_1 = __importDefault(require("../Views/produtos_view"));
+const ProdutosSearch_view_1 = __importDefault(require("../Views/ProdutosSearch_view"));
 const Yup = __importStar(require("yup"));
 exports.default = {
     async ListaProdutoAlterado(lastPulledVersion) {
@@ -71,5 +72,18 @@ exports.default = {
         const produtos = produtoRepository.create(data);
         await produtoRepository.save(produtos);
         return response.status(201).json(produtos);
+    },
+    async searchProduct(request, response) {
+        const { term } = request.query;
+        const { cnpj_emp } = request.params;
+        console.log(term, cnpj_emp);
+        const produtoRepository = (0, typeorm_1.getRepository)(Produtos_1.default);
+        const data = await produtoRepository.find({
+            where: [
+                { decricao: (0, typeorm_1.Like)(`%${term === null || term === void 0 ? void 0 : term.toLocaleString().toUpperCase()}%`), cnpj_emp: cnpj_emp },
+                { codigo: (0, typeorm_1.Like)(`%${term === null || term === void 0 ? void 0 : term.toLocaleString().toUpperCase()}%`), cnpj_emp: cnpj_emp }
+            ]
+        });
+        return response.status(200).json(ProdutosSearch_view_1.default.renderMany(data));
     }
 };

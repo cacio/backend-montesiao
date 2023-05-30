@@ -7,10 +7,18 @@ class createClientes1639675512009 {
         await queryRunner.createTable(new typeorm_1.Table({
             name: "clientes",
             columns: [
+                // {
+                //     name: "id",
+                //     type: "uuid",
+                //     isPrimary: true,
+                // },
                 {
-                    name: "id",
-                    type: "uuid",
+                    name: 'id',
+                    type: 'integer',
+                    unsigned: true,
                     isPrimary: true,
+                    isGenerated: true,
+                    generationStrategy: 'increment',
                 },
                 {
                     name: 'CODIGO',

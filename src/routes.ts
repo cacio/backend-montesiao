@@ -8,6 +8,8 @@ import ProdutoControllers from './controllers/ProdutoControllers';
 import CondicoesPagamentoController from './controllers/CondicoesPagamentoController';
 import DuplicReceberControllers from './controllers/DuplicReceberControllers';
 import PedidoController from './controllers/PedidoController';
+import IntegracaoErpController from './controllers/IntegracaoErpController';
+import TotalNotaEntrada from './controllers/TotalNotaEntrada';
 
 const routes = Router();
 
@@ -26,6 +28,7 @@ routes.post('/auth', AuthController.Authenticate);
 */
 routes.get('/clientes/:cnpj_emp',ClientesControllers.index);
 routes.get('/clientes/sync/pull',AsyncController.asyncClientes);
+routes.get('/clientes/search/:cnpj_emp',ClientesControllers.searchCliente);
 routes.post('/clientes/repre',ClientesControllers.indexRepresentante);
 routes.post('/clientes', ClientesControllers.create);
 
@@ -33,6 +36,8 @@ routes.post('/clientes', ClientesControllers.create);
 * Produtos
 */
 routes.post('/produtos',ProdutoControllers.create);
+routes.get('/produtos/search/:cnpj_emp',ProdutoControllers.searchProduct);
+
 
 /*
 *  Condições de pagamento
@@ -49,5 +54,17 @@ routes.post('/duplicreceber', DuplicReceberControllers.create);
 * Pedido
 */
 routes.post('/pedido/async', PedidoController.AsyncCreate);
+routes.post('/pedido/handllercreate/:cnpj_emp', PedidoController.create);
+routes.get('/pedido/HandllerPushPedidoRetaguarda/:cnpj_emp', PedidoController.HandllerPushPedidoRetaguarda);
+/**
+ * Pedido ERP 
+ */
 
+routes.post('/integracaopedidoerp', IntegracaoErpController.create);
+
+/**
+ * Total nota entrada
+ */
+routes.get('/totalnotaentrada/:numerosemana/:cnpj_emp', TotalNotaEntrada.handllerGetTotalNotaEntrada);
+routes.post('/totalnotaentrada', TotalNotaEntrada.HandllercreateUpdate);
 export default routes;

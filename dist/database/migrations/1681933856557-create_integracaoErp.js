@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createDuplicReber1648471544141 = void 0;
+exports.createIntegracaoErp1681933856557 = void 0;
 const typeorm_1 = require("typeorm");
-class createDuplicReber1648471544141 {
+class createIntegracaoErp1681933856557 {
     async up(queryRunner) {
         await queryRunner.createTable(new typeorm_1.Table({
-            name: 'duplic_receber',
+            name: "integracao_erp",
             columns: [
                 // {
-                //     name: "id",
-                //     type: "uuid",
-                //     isPrimary: true,
-                //   },
+                //     name:"id",
+                //     type:"uuid",
+                //     isPrimary:true,
+                // },
                 {
                     name: 'id',
                     type: 'integer',
@@ -25,26 +25,17 @@ class createDuplicReber1648471544141 {
                     type: "varchar"
                 },
                 {
-                    name: "ndup",
+                    name: "idpedido",
                     type: "varchar"
                 },
                 {
-                    name: "vlrdup",
-                    type: "decimal",
-                    precision: 12,
-                    scale: 2
-                },
-                {
-                    name: "vencdup",
-                    type: "date"
-                },
-                {
-                    name: "cod_cli",
+                    name: "idpederp",
                     type: "varchar"
                 },
                 {
-                    name: "forma_pagamento",
-                    type: "varchar"
+                    name: "tpmovim",
+                    type: "enum",
+                    enum: ['I', 'D', 'U'],
                 },
                 {
                     name: "cnpj_emp",
@@ -64,7 +55,7 @@ class createDuplicReber1648471544141 {
         }));
     }
     async down(queryRunner) {
-        await queryRunner.dropTable('duplic_receber');
+        await queryRunner.dropTable('integracao_erp');
     }
 }
-exports.createDuplicReber1648471544141 = createDuplicReber1648471544141;
+exports.createIntegracaoErp1681933856557 = createIntegracaoErp1681933856557;

@@ -1,10 +1,13 @@
 import { Request,Response } from 'express';
-import { getRepository,MoreThan } from 'typeorm';
+import { getRepository,Index,MoreThan, Like } from 'typeorm';
 import Produtos from '../models/Produtos';
 import produtos_view from '../Views/produtos_view';
+import ProdutosSearch_view from '../Views/ProdutosSearch_view';
 import * as Yup from 'yup';
 
+
 export default{
+   
     async ListaProdutoAlterado(lastPulledVersion:String){
         const produtoRepository = getRepository(Produtos);
 
@@ -58,6 +61,24 @@ export default{
         await produtoRepository.save(produtos);
 
         return response.status(201).json(produtos);
-    }
+    },
+    async searchProduct(request: Request,response: Response){
+        const {term}     = request.query;
+        const {cnpj_emp} = request.params;
+        console.log(term,cnpj_emp);
+        const produtoRepository = getRepository(Produtos);
+
+        const data = await produtoRepository.find(
+            {
+                where:[
+                    {decricao:Like(`%${term?.toLocaleString().toUpperCase()}%`),cnpj_emp:cnpj_emp},
+                    {codigo:Like(`%${term?.toLocaleString().toUpperCase()}%`),cnpj_emp:cnpj_emp}
+                ]
+            }
+            );
+
+        return response.status(200).json(ProdutosSearch_view.renderMany(data));
+
+    }   
 
 }

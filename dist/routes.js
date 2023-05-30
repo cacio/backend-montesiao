@@ -13,6 +13,8 @@ const ProdutoControllers_1 = __importDefault(require("./controllers/ProdutoContr
 const CondicoesPagamentoController_1 = __importDefault(require("./controllers/CondicoesPagamentoController"));
 const DuplicReceberControllers_1 = __importDefault(require("./controllers/DuplicReceberControllers"));
 const PedidoController_1 = __importDefault(require("./controllers/PedidoController"));
+const IntegracaoErpController_1 = __importDefault(require("./controllers/IntegracaoErpController"));
+const TotalNotaEntrada_1 = __importDefault(require("./controllers/TotalNotaEntrada"));
 const routes = (0, express_1.Router)();
 /*
 * Usuario
@@ -28,12 +30,14 @@ routes.post('/auth', AuthController_1.default.Authenticate);
 */
 routes.get('/clientes/:cnpj_emp', ClientesControllers_1.default.index);
 routes.get('/clientes/sync/pull', AsyncController_1.default.asyncClientes);
+routes.get('/clientes/search/:cnpj_emp', ClientesControllers_1.default.searchCliente);
 routes.post('/clientes/repre', ClientesControllers_1.default.indexRepresentante);
 routes.post('/clientes', ClientesControllers_1.default.create);
 /*
 * Produtos
 */
 routes.post('/produtos', ProdutoControllers_1.default.create);
+routes.get('/produtos/search/:cnpj_emp', ProdutoControllers_1.default.searchProduct);
 /*
 *  Condições de pagamento
 */
@@ -47,4 +51,15 @@ routes.post('/duplicreceber', DuplicReceberControllers_1.default.create);
 * Pedido
 */
 routes.post('/pedido/async', PedidoController_1.default.AsyncCreate);
+routes.post('/pedido/handllercreate/:cnpj_emp', PedidoController_1.default.create);
+routes.get('/pedido/HandllerPushPedidoRetaguarda/:cnpj_emp', PedidoController_1.default.HandllerPushPedidoRetaguarda);
+/**
+ * Pedido ERP
+ */
+routes.post('/integracaopedidoerp', IntegracaoErpController_1.default.create);
+/**
+ * Total nota entrada
+ */
+routes.get('/totalnotaentrada/:numerosemana/:cnpj_emp', TotalNotaEntrada_1.default.handllerGetTotalNotaEntrada);
+routes.post('/totalnotaentrada', TotalNotaEntrada_1.default.HandllercreateUpdate);
 exports.default = routes;

@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createDuplicReber1648471544141 = void 0;
+exports.createTotalNotasEntrada1685036800794 = void 0;
 const typeorm_1 = require("typeorm");
-class createDuplicReber1648471544141 {
+class createTotalNotasEntrada1685036800794 {
     async up(queryRunner) {
         await queryRunner.createTable(new typeorm_1.Table({
-            name: 'duplic_receber',
+            name: 'totaliza_notas_entrada',
             columns: [
                 // {
-                //     name: "id",
-                //     type: "uuid",
-                //     isPrimary: true,
-                //   },
+                //     name:"id",
+                //     type:"uuid",
+                //     isPrimary:true,
+                // },
                 {
                     name: 'id',
                     type: 'integer',
@@ -21,30 +21,16 @@ class createDuplicReber1648471544141 {
                     generationStrategy: 'increment',
                 },
                 {
-                    name: "codigo",
+                    name: "numerosemana",
                     type: "varchar"
                 },
                 {
-                    name: "ndup",
-                    type: "varchar"
+                    name: "tot_icmsst",
+                    type: "decimal(20, 6)",
                 },
                 {
-                    name: "vlrdup",
-                    type: "decimal",
-                    precision: 12,
-                    scale: 2
-                },
-                {
-                    name: "vencdup",
-                    type: "date"
-                },
-                {
-                    name: "cod_cli",
-                    type: "varchar"
-                },
-                {
-                    name: "forma_pagamento",
-                    type: "varchar"
+                    name: "vltotnota",
+                    type: "decimal(20, 6)"
                 },
                 {
                     name: "cnpj_emp",
@@ -64,7 +50,7 @@ class createDuplicReber1648471544141 {
         }));
     }
     async down(queryRunner) {
-        await queryRunner.dropTable('duplic_receber');
+        await queryRunner.dropTable('totaliza_notas_entrada');
     }
 }
-exports.createDuplicReber1648471544141 = createDuplicReber1648471544141;
+exports.createTotalNotasEntrada1685036800794 = createTotalNotasEntrada1685036800794;

@@ -1,4 +1,5 @@
-import { Entity,Column,CreateDateColumn,PrimaryColumn } from "typeorm";
+import { Entity,Column,CreateDateColumn,PrimaryColumn,ManyToMany ,JoinColumn } from "typeorm";
+import  PedidoDetalhe  from './PedidoDetalhe';
 import { v4 as uuidV4 } from "uuid";
 
 @Entity('pedido')
@@ -63,6 +64,9 @@ export default class Pedido{
 
     @Column()
     retirada:string;
+
+    @ManyToMany((type) => PedidoDetalhe,(detalhe)=>detalhe.pedido_id)    
+    detalhe: PedidoDetalhe[]
 
     @Column()
     cnpj_emp:string;

@@ -6,11 +6,19 @@ export class createPedido1650376266727 implements MigrationInterface {
         await queryRunner.createTable(new Table({
             name:'pedido',
             columns:[
+                // {
+                //     name: "id",
+                //     type: "uuid",
+                //     isPrimary: true,
+                // },
                 {
-                    name: "id",
-                    type: "uuid",
-                    isPrimary: true,
-                },
+                    name:'id',
+                    type:'integer',
+                    unsigned:true,
+                    isPrimary:true,
+                    isGenerated:true,
+                    generationStrategy:'increment',     
+                  },
                 {
                     name:"pedido_id_despositivo",
                     type:"varchar"

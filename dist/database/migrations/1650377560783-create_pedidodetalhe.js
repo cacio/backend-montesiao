@@ -7,10 +7,18 @@ class createPedidodetalhe1650377560783 {
         await queryRunner.createTable(new typeorm_1.Table({
             name: "pedidodetalhe",
             columns: [
+                // {
+                //     name: "id",
+                //     type: "uuid",
+                //     isPrimary: true,
+                // },
                 {
-                    name: "id",
-                    type: "uuid",
+                    name: 'id',
+                    type: 'integer',
+                    unsigned: true,
                     isPrimary: true,
+                    isGenerated: true,
+                    generationStrategy: 'increment',
                 },
                 {
                     name: "pedido_id_despositivo",

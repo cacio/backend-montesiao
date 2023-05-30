@@ -6,10 +6,18 @@ export class createDuplicReber1648471544141 implements MigrationInterface {
         await queryRunner.createTable(new Table({
                 name:'duplic_receber',
                 columns: [
+                    // {
+                    //     name: "id",
+                    //     type: "uuid",
+                    //     isPrimary: true,
+                    //   },
                     {
-                        name: "id",
-                        type: "uuid",
-                        isPrimary: true,
+                        name:'id',
+                        type:'integer',
+                        unsigned:true,
+                        isPrimary:true,
+                        isGenerated:true,
+                        generationStrategy:'increment',     
                       },
                       {
                         name:"codigo",

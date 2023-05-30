@@ -1,7 +1,9 @@
 import {Request,Response} from 'express';
-import { getRepository,MoreThan } from 'typeorm';
-import clientes
- from '../models/Clientes';
+import { getRepository,Like,MoreThan } from 'typeorm';
+import * as socketio from 'socket.io';
+import clientes from '../models/Clientes';
+import clientesSearch_view from '../Views/clientesSearch_view';
+
 export default{
     async index(request: Request,response: Response){
         
@@ -114,6 +116,8 @@ export default{
             foto,    
             cnpj_emp } = request.body;
             
+            const io: socketio.Server = request.app.get('socketio');
+
             const clienteRepository = getRepository(clientes);
 
             const data = {CODIGO,    
@@ -186,9 +190,34 @@ export default{
                 const cliente = clienteRepository.create(data);
                 
                 await clienteRepository.save(cliente);
+                
+                io.emit('newClient',cliente);
 
                 return response.status(201).json(cliente);
 
-    }
+    },
+    async searchCliente(request: Request,response: Response){
+        const  {term}    = request.query;
+        const {cnpj_emp} = request.params; 
+       
+        const clienteRepository = getRepository(clientes);
+
+        const data = await clienteRepository.find({
+            where:
+                [
+                {NOME:Like(`%${term?.toLocaleString().toUpperCase()}%`),cnpj_emp:cnpj_emp},
+                {FANTASIA:Like(`%${term?.toLocaleString().toUpperCase()}%`),cnpj_emp:cnpj_emp},
+                {CODIGO:Like(`%${term?.toLocaleString().toUpperCase()}%`),cnpj_emp:cnpj_emp},                
+                
+             ],
+            
+        
+            
+        })
+
+        
+
+        return response.status(200).json(clientesSearch_view.renderMany(data));
+    } 
 
 }

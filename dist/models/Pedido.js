@@ -8,8 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const PedidoDetalhe_1 = __importDefault(require("./PedidoDetalhe"));
 const uuid_1 = require("uuid");
 let Pedido = class Pedido {
     constructor() {
@@ -98,6 +102,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Pedido.prototype, "retirada", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)((type) => PedidoDetalhe_1.default, (detalhe) => detalhe.pedido_id),
+    __metadata("design:type", Array)
+], Pedido.prototype, "detalhe", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

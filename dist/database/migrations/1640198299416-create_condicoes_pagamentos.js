@@ -7,10 +7,18 @@ class createCondicoesPagamentos1640198299416 {
         await queryRunner.createTable(new typeorm_1.Table({
             name: "condigoes_pagamento",
             columns: [
+                // {
+                //   name: "id",
+                //   type: "uuid",
+                //   isPrimary: true,
+                // },
                 {
-                    name: "id",
-                    type: "uuid",
+                    name: 'id',
+                    type: 'integer',
+                    unsigned: true,
                     isPrimary: true,
+                    isGenerated: true,
+                    generationStrategy: 'increment',
                 },
                 {
                     name: "codigo",
