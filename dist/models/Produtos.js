@@ -10,16 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const uuid_1 = require("uuid");
 let Produtos = class Produtos {
-    constructor() {
-        if (!this.id) {
-            this.id = (0, uuid_1.v4)();
-        }
-    }
 };
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
     __metadata("design:type", String)
 ], Produtos.prototype, "id", void 0);
 __decorate([
@@ -79,7 +73,6 @@ __decorate([
     __metadata("design:type", Date)
 ], Produtos.prototype, "updated_at", void 0);
 Produtos = __decorate([
-    (0, typeorm_1.Entity)('produtos'),
-    __metadata("design:paramtypes", [])
+    (0, typeorm_1.Entity)('produtos')
 ], Produtos);
 exports.default = Produtos;

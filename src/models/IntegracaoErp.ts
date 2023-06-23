@@ -1,10 +1,10 @@
-import { Entity,Column,CreateDateColumn,PrimaryColumn } from "typeorm";
+import { Entity,Column,CreateDateColumn,PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 export type RoleType = "I" | "D" | "U";
 @Entity('integracao_erp')
 export default class IntegracaoErp{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('increment')
     id: string;
 
     @Column()
@@ -31,10 +31,5 @@ export default class IntegracaoErp{
 
     @CreateDateColumn()
     updated_at:Date;
-
-    constructor() {
-        if (!this.id) {
-            this.id = uuidV4();
-        }
-    }
+  
 }

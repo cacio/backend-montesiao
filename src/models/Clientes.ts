@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity('clientes')
 export default class clientes{
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('increment')
     id:string;
 
     @Column()
@@ -180,9 +180,5 @@ export default class clientes{
     @CreateDateColumn()
     updated_at:Date;
 
-    constructor() {
-        if (!this.id) {
-            this.id = uuidV4();
-        }
-    }
+    
 }

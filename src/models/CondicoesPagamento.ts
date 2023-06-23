@@ -1,10 +1,10 @@
-import { Entity,Column,CreateDateColumn,PrimaryColumn } from "typeorm";
+import { Entity,Column,CreateDateColumn,PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity('condigoes_pagamento')
 export default class CondicoesPagamento{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('increment')
     id: string;
 
     @Column()
@@ -22,9 +22,5 @@ export default class CondicoesPagamento{
     @CreateDateColumn()
     updated_at:Date;
 
-    constructor() {
-        if (!this.id) {
-            this.id = uuidV4();
-        }
-    }
+    
 }

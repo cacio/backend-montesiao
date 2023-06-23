@@ -10,16 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const uuid_1 = require("uuid");
 let CondicoesPagamento = class CondicoesPagamento {
-    constructor() {
-        if (!this.id) {
-            this.id = (0, uuid_1.v4)();
-        }
-    }
 };
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
     __metadata("design:type", String)
 ], CondicoesPagamento.prototype, "id", void 0);
 __decorate([
@@ -43,7 +37,6 @@ __decorate([
     __metadata("design:type", Date)
 ], CondicoesPagamento.prototype, "updated_at", void 0);
 CondicoesPagamento = __decorate([
-    (0, typeorm_1.Entity)('condigoes_pagamento'),
-    __metadata("design:paramtypes", [])
+    (0, typeorm_1.Entity)('condigoes_pagamento')
 ], CondicoesPagamento);
 exports.default = CondicoesPagamento;

@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from "uuid";
 
 @Entity('totaliza_notas_entrada')
 export default class TotalNotaEntrada{
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn('increment')
     id: string;
 
     @Column()
@@ -24,10 +24,6 @@ export default class TotalNotaEntrada{
     @CreateDateColumn()
     updated_at:Date;
 
-    constructor() {
-        if (!this.id) {
-            this.id = uuidV4();
-        }
-    }
+    
 
 }
