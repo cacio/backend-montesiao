@@ -53,8 +53,10 @@ exports.default = {
                         valor_desconto: element.valor_desconto,
                         id_tabela_preco: element.id_tabela_preco,
                         retirada: element.retirada,
+                        placa: element.placa,
                         cnpj_emp: element.cnpj_emp
                     };
+                    console.log(element.data_pedido);
                     const pedido = pedidoRepository.create(data);
                     await pedidoRepository.save(pedido);
                 }
@@ -131,6 +133,7 @@ exports.default = {
                     valor_desconto: item.valor_desconto,
                     id_tabela_preco: item.id_tabela_preco,
                     retirada: item.retirada,
+                    placa: item.placa,
                     cnpj_emp: item.cnpj_emp
                 };
                 await pedidoRepository.createQueryBuilder().insert().into(Pedido_1.default).values(data).execute();

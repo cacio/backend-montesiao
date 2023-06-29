@@ -8,46 +8,52 @@ export default{
    
    
     async create(request: Request,response: Response){
-        const { codigo,idpedido,idpederp,tpmovim,cnpj_emp }  = request.body;
+        //const { codigo,idpedido,idpederp,tpmovim,cnpj_emp }  = request.body;
+         
+        const data         = request.body;
+        const { cnpj_emp } = request.params;
+
+        const currentData : IntegracaoErp[] = data;
         
-                
         const IntegracaoErpRepository = getRepository(IntegracaoErp);
-        
-        const data = {
-            codigo,
-            idpedido,
-            idpederp,
-            tpmovim,
-            cnpj_emp
+
+        for(const element of currentData){
+
+            const codigo = element.codigo;
+            const idpedido = element.idpedido;
+            const idpederp = element.idpederp;
+            const tpmovim  = element.tpmovim;
+            const cnpj_emp = element.cnpj_emp;            
+
+            const IntegracaoCriado = await IntegracaoErpRepository.find({
+                idpedido: idpedido
+            });
+
+            const data = {
+                codigo,
+                idpedido,
+                idpederp,
+                tpmovim,
+                cnpj_emp
+            }
+
+            if(IntegracaoCriado.length == 0){
+                const Integracao = IntegracaoErpRepository.create(data);
+
+                await IntegracaoErpRepository.save(Integracao);                
+            }
+
+       
         }
 
-        const IntegracaoCriado = await IntegracaoErpRepository.find({
-            idpedido: idpedido
+        const io: socketio.Server = request.app.get('socketio');
+        io.emit('pushErpCode',{
+            pedido:currentData,
+            cnpj_emp:cnpj_emp
         });
 
-        if(IntegracaoCriado.length == 0){
-            console.log('aqui');
-            const Integracao = IntegracaoErpRepository.create(data);
-
-            await IntegracaoErpRepository.save(Integracao);
-            
-            const io: socketio.Server = request.app.get('socketio');
-            io.emit('pushErpCode',{
-                pedido:Integracao,
-                cnpj_emp:cnpj_emp
-            });
-      
-            return response.status(201).json(Integracao);
-        }else{
-            console.log('aqui');
-            const io: socketio.Server = request.app.get('socketio');
-            io.emit('pushErpCode',{
-                pedido:IntegracaoCriado,
-                cnpj_emp:cnpj_emp
-            });
-
-            return response.status(201).json(IntegracaoCriado);
-        }
+        return response.status(201).json(currentData);
+       
        
 
         

@@ -1,5 +1,5 @@
 // module.exports = {    
-//     "type":"postgres",
+//     "type":"mysql",
 //     "url":process.env.DATABASE_URL,
 //     //"extra": {"ssl": { "rejectUnauthorized": false }},
 //     "migrations":[

@@ -60,7 +60,7 @@ routes.get('/pedido/HandllerPushPedidoRetaguarda/:cnpj_emp', PedidoController.Ha
  * Pedido ERP 
  */
 
-routes.post('/integracaopedidoerp', IntegracaoErpController.create);
+routes.post('/integracaopedidoerp/:cnpj_emp', IntegracaoErpController.create);
 
 /**
  * Total nota entrada

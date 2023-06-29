@@ -99,6 +99,10 @@ class createPedido1650376266727 {
                     type: "varchar"
                 },
                 {
+                    name: "placa",
+                    type: "varchar"
+                },
+                {
                     name: "cnpj_emp",
                     type: 'varchar'
                 },

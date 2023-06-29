@@ -65,6 +65,9 @@ export default class Pedido{
     @Column()
     retirada:string;
 
+    @Column()
+    placa:string;
+
     @ManyToMany((type) => PedidoDetalhe,(detalhe)=>detalhe.pedido_id)    
     detalhe: PedidoDetalhe[]
 

@@ -97,6 +97,10 @@ __decorate([
     __metadata("design:type", String)
 ], Pedido.prototype, "retirada", void 0);
 __decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Pedido.prototype, "placa", void 0);
+__decorate([
     (0, typeorm_1.ManyToMany)((type) => PedidoDetalhe_1.default, (detalhe) => detalhe.pedido_id),
     __metadata("design:type", Array)
 ], Pedido.prototype, "detalhe", void 0);
